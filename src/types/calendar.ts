@@ -5,6 +5,7 @@ export interface CalendarEvent {
   date: string;
   title: string;
   color: string;
+  done: boolean;
 }
 
 export interface DayCellProps {

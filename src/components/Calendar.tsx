@@ -22,6 +22,7 @@ export default function Calendar() {
     getEventsForDate,
     addEvent,
     deleteEvent,
+    toggleEventDone,
     randomColor,
   } = useCalendar();
 
@@ -51,6 +52,7 @@ export default function Calendar() {
         eventsForDay={eventsForDay}
         onAddEvent={addEvent}
         onDeleteEvent={deleteEvent}
+        onToggleDone={toggleEventDone}
         randomColor={randomColor}
       />
     </div>

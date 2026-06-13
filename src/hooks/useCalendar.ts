@@ -82,6 +82,7 @@ export function useCalendar() {
         date: selectedDay.toFormat("yyyy-MM-dd"),
         title: title.trim(),
         color,
+        done: false,
       };
       setEvents((prev) => [...prev, newEvent]);
       localStorage.setItem("events", JSON.stringify([...events, newEvent]));
@@ -94,6 +95,17 @@ export function useCalendar() {
       const newEventsArray = events.filter((e) => e.id !== id);
       setEvents(newEventsArray);
       localStorage.setItem("events", JSON.stringify(newEventsArray));
+    },
+    [events],
+  );
+
+  const toggleEventDone = useCallback(
+    (id: string) => {
+      const updated = events.map((e) =>
+        e.id === id ? { ...e, done: !e.done } : e,
+      );
+      setEvents(updated);
+      localStorage.setItem("events", JSON.stringify(updated));
     },
     [events],
   );
@@ -113,7 +125,11 @@ export function useCalendar() {
   useEffect(() => {
     const savedEvents = localStorage.getItem("events");
     if (savedEvents) {
-      setEvents(JSON.parse(savedEvents));
+      const parsed = JSON.parse(savedEvents) as CalendarEvent[];
+      const migrated = parsed.map((e) =>
+        typeof e.done === "boolean" ? e : { ...e, done: false },
+      );
+      setEvents(migrated);
     }
   }, []);
 
@@ -134,6 +150,7 @@ export function useCalendar() {
     getEventsForDate,
     addEvent,
     deleteEvent,
+    toggleEventDone,
     randomColor,
   };
 }

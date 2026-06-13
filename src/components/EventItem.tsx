@@ -1,13 +1,35 @@
 import type { CalendarEvent } from "../types/calendar";
+import classnames from "classnames";
 
 interface EventItemProps {
   event: CalendarEvent;
   onDelete: (id: string) => void;
+  onToggleDone: (id: string) => void;
 }
 
-export function EventItem({ event, onDelete }: EventItemProps) {
+export function EventItem({ event, onDelete, onToggleDone }: EventItemProps) {
   return (
-    <div className="event-item">
+    <div className={classnames("event-item", { "event-item--done": event.done })}>
+      <button
+        className="event-checkbox"
+        onClick={() => onToggleDone(event.id)}
+        aria-label={event.done ? "Mark as not done" : "Mark as done"}
+      >
+        {event.done && (
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        )}
+      </button>
       <span
         className="event-color-bar"
         style={{ backgroundColor: event.color }}

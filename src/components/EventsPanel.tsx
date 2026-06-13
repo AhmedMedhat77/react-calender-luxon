@@ -9,6 +9,7 @@ interface EventsPanelProps {
   eventsForDay: CalendarEvent[];
   onAddEvent: (title: string, color: EventColor) => void;
   onDeleteEvent: (id: string) => void;
+  onToggleDone: (id: string) => void;
   randomColor: () => EventColor;
 }
 
@@ -17,6 +18,7 @@ export function EventsPanel({
   eventsForDay,
   onAddEvent,
   onDeleteEvent,
+  onToggleDone,
   randomColor,
 }: EventsPanelProps) {
   const [showForm, setShowForm] = useState(false);
@@ -86,7 +88,7 @@ export function EventsPanel({
           </div>
         )}
         {eventsForDay.map((event) => (
-          <EventItem key={event.id} event={event} onDelete={onDeleteEvent} />
+          <EventItem key={event.id} event={event} onDelete={onDeleteEvent} onToggleDone={onToggleDone} />
         ))}
       </div>
     </div>

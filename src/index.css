@@ -520,3 +520,39 @@ body {
   background: #fef2f2;
   color: #ef4444;
 }
+
+.event-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: #10b981;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.event-checkbox:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+.event-item--done .event-checkbox {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+
+.event-item--done .event-title {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.event-item--done .event-color-bar {
+  opacity: 0.4;
+}
